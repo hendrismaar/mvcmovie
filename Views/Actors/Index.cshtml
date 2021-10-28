@@ -1,0 +1,72 @@
+﻿@model MvcMovie.Models.ActorsViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Actors" asp-action="Index" method="get">
+    <p>
+
+       <select asp-for="BirthYear" asp-items="Model.BirthYears">
+            <option value="">All</option>
+        </select>
+
+        Name: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Actors[0].GivenName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actors[0].FamilyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actors[0].Birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actors[0].Birthplace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actors[0].NumberOfOscars)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Actors)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GivenName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FamilyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Birthday)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Birthplace)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfOscars)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
